@@ -27,9 +27,9 @@
 
 namespace pystack {
 void ELF::Close() {
-  if (addr_ != nullptr) {
+  if (addr_ != NULL) {
     munmap(addr_, length_);
-    addr_ = nullptr;
+    addr_ = NULL;
   }
 }
 
@@ -43,7 +43,7 @@ void ELF::Open(const std::string &target) {
     throw FatalException(ss.str());
   }
   length_ = lseek(fd, 0, SEEK_END);
-  addr_ = mmap(nullptr, length_, PROT_READ, MAP_SHARED, fd, 0);
+  addr_ = mmap(NULL, length_, PROT_READ, MAP_SHARED, fd, 0);
   while (close(fd) == -1) {
     ;
   }

@@ -32,7 +32,7 @@ void PtraceAttach(pid_t pid) {
     ss << "Failed to attach to PID " << pid << ": " << strerror(errno);
     throw FatalException(ss.str());
   }
-  if (wait(nullptr) == -1) {
+  if (wait(NULL) == -1) {
     std::ostringstream ss;
     ss << "Failed to wait on PID " << pid << ": " << strerror(errno);
     throw FatalException(ss.str());

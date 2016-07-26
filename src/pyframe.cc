@@ -148,9 +148,10 @@ unsigned long ThreadStateAddr(pid_t pid) {
   // the full soname. That determines where we need to look to find our symbol
   // table.
   std::string libpython;
-  for (const auto &lib : target.NeededLibs()) {
-    if (lib.find("libpython") != std::string::npos) {
-      libpython = lib;
+  auto libs = target.NeededLibs();
+  for (auto lib_i = libs.begin(); lib_i != libs.end() ; lib_i++) {
+    if ((*lib_i).find("libpython") != std::string::npos) {
+      libpython = *lib_i;
       break;
     }
   }

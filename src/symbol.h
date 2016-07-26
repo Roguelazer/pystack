@@ -35,7 +35,7 @@ namespace pystack {
 // should use.
 class ELF {
  public:
-  ELF() : addr_(nullptr), length_(0), dynamic_(-1), dynstr_(-1), dynsym_(-1) {}
+  ELF() : addr_(NULL), length_(0), dynamic_(-1), dynstr_(-1), dynsym_(-1) {}
   ~ELF() { Close(); }
 
   // Open a file

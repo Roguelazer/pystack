@@ -33,8 +33,8 @@ class Frame {
   inline size_t line() const { return line_; }
 
  private:
-  const std::string file_;
-  const size_t line_;
+  std::string file_;
+  size_t line_;
 };
 
 std::ostream &operator<<(std::ostream &os, const Frame &frame);

@@ -14,6 +14,8 @@
 // along with Pystack.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <getopt.h>
+#include <sys/select.h>
+#include <sys/time.h>
 
 #include <chrono>
 #include <iostream>
@@ -86,7 +88,7 @@ int main(int argc, char **argv) {
     std::cerr << usage_str;
     return 1;
   }
-  long pid = std::strtol(argv[argc - 1], nullptr, 10);
+  long pid = std::strtol(argv[argc - 1], NULL, 10);
   if (pid > std::numeric_limits<pid_t>::max() ||
       pid < std::numeric_limits<pid_t>::min()) {
     std::cerr << "PID " << pid << " is out of valid PID range.\n";
@@ -113,7 +115,10 @@ int main(int argc, char **argv) {
           break;
         }
         PtraceDetach(pid);
-        std::this_thread::sleep_for(interval);
+        struct timespec timeout;
+        timeout.tv_nsec = std::chrono::duration_cast<std::chrono::nanoseconds>(interval).count();
+        pselect(0, NULL, NULL, NULL, &timeout, NULL);
+        //std::this_thread::sleep_for(interval);
         std::cout << "\n";
         PtraceAttach(pid);
       }

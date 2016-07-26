@@ -5,7 +5,8 @@ running Python process. It is a little like Python's
 [`traceback.print_tb()`](https://docs.python.org/2/library/traceback.html#traceback.print_tb),
 but rather than being a Python function it is a CLI tool that you can run
 against arbitrary processes that weren't already instrumented to dump their
-stack.
+stack. There's a
+[blog post explaining how it works](https://eklitzke.org/pystack).
 
 You use it like this:
 
